@@ -68,7 +68,7 @@ contract SimpleStorage {
     /**
      * @param _favoriteNumber Person's favorite-Number.
      * @dev Stores Person's Favorite-Number into Contract's storage.
-     *
+     * @notice In future, If Any contract inherits this contract then that can override this Function.
      */
     function storeNumber(uint256 _favoriteNumber) public virtual {
         if (_favoriteNumber <= 0) {
