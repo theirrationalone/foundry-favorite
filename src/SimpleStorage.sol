@@ -40,10 +40,10 @@ contract SimpleStorage {
     ////////////////////////////////
     /// State variables         ///
     //////////////////////////////
-    uint256 public s_favoriteNumber;
+    uint256 private s_favoriteNumber;
 
     Person[] private s_people;
-    mapping(string name => uint256 favoriteNumber) public s_personFavoriteNumber;
+    mapping(string name => uint256 favoriteNumber) private s_personFavoriteNumber;
 
     ////////////////////////////////////
     /// Special Functions           ///
