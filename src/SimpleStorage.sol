@@ -51,14 +51,43 @@ contract SimpleStorage {
     /**
      * @dev Doesn't allow any low level Function call without calldata.
      */
+
     receive() external payable {
         revert SimpleStorage__InvalidOrNotAllowedCall();
     }
 
     /**
      * @dev Doesn't allow any low level Function call even with calldata.
+     * @notice If there's any function present inside "fallback" function(special) as a fallback,
+     *
+     *     And on very same invocation, If any other function's signature passed into "call" funtion as an argument or lets say if any "Invalid" data passed into "call" function as an argument,
+     *
+     *     And the Contract (on which "call" function invoked) hasn't that other function(whose signature is passed into call function)...
+     *
+     *     Then, that function who was already inside the "fallback" function shall be executed.
+     *
+     *     And If function signature is valid and its definition is in the contract (on which "call" function invoked) then it will be executed and the function who's inside the "fallback" function shall be ignored.
+     *
+     *     As the name itself suggests "fallback" statements inside it, will be executed at last and "call" function will return True Boolean and data(if had) otherwise (in all other above cases where signature is valid) will return False Boolean and data(if had).
+     *
+     * The fact here is, Even if "call" function returns False Boolean, It will execute or invoke "signatured" function if that's a valid function available into the Contract on which "call" function was performed.
+     *
+     *
+     * @notice Keep everything in mind from previous @notice.... and read below comments...
+     *
+     * @notice If we Pass some balance or more concise some(valid balance) with "call" funciton like this: **address.call{value: 1 ether}("some_data")** and "call" function has a valid signature of a function that also exists into the referenced contract then...
+     *
+     *
+     * The "call" function will return false and won't execute any statement inside "fallback" function.
+     * Actually the reason behind getting False boolean in this use-case is that...
+     * A Contract can't pay to itself and also expects a payable function either in "fallback" function or in "signatured" function(if valid & available). Also applicable on "receive" function but with empty data only.
+     *
+     *
+     * So the conclusion is... That's ***THE REASON*** why we need to have either an owner(immutable variable) or onlyOwner Modifier.
+     *
      */
     fallback() external payable {
+        // addPerson("any", 12);
         revert SimpleStorage__InvalidOrNotAllowedCall();
     }
 
