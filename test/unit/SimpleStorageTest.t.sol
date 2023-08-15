@@ -75,13 +75,17 @@ contract SimpleStorageTest is Test {
         //     abi.encodeWithSignature("storeAddress(string)", "House Number: 255")
         // );
 
-        (bool success,) = payable(address(s_simpleStorage)).call{value: 1 ether}(
-            abi.encodeWithSignature("storeNumber(uint256)", 2667)
-        );
+        // (bool success,) = payable(address(s_simpleStorage)).call{value: 1 ether}(
+        //     abi.encodeWithSignature("storeNumber(uint256)", 2667)
+        // );
+
+        // call without payable amount and with invalid signature.
+        // Shall use fallback function absolutlely.
+        (bool success,) = payable(address(s_simpleStorage)).call(abi.encodeWithSignature("storeNumbe(uint256)", 2667));
 
         console.log("is success: ", success);
         console.log("Favorite Number: ", s_simpleStorage.getFavoriteNumber());
 
-        assertEq(success, false);
+        assertEq(success, true);
     }
 }

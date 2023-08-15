@@ -86,6 +86,7 @@ contract SimpleStorage {
      * So the conclusion is... That's ***THE REASON*** why we need to have either an owner(immutable variable) or onlyOwner Modifier.
      *
      */
+
     fallback() external payable {
         // addPerson("any", 12);
         revert SimpleStorage__InvalidOrNotAllowedCall();
