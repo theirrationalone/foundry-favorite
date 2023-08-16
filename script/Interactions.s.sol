@@ -7,6 +7,7 @@ import {SimpleStorage} from "../src/SimpleStorage.sol";
 
 contract AddFavoriteNumber is Script {
     function addFavoriteNumber(address _simpleStorageInstanceAddress, uint256 _favoriteNumber) public {
+        console.log("storeNumber function performed...!");
         SimpleStorage(payable(_simpleStorageInstanceAddress)).storeNumber(_favoriteNumber);
     }
 
@@ -15,9 +16,8 @@ contract AddFavoriteNumber is Script {
 
         vm.startBroadcast();
         simpleStorage = new SimpleStorage();
-        vm.stopBroadcast();
-
         addFavoriteNumber(address(simpleStorage), favoriteNumber);
+        vm.stopBroadcast();
     }
 }
 
@@ -34,8 +34,7 @@ contract AddPerson is Script {
 
         vm.startBroadcast();
         simpleStorage = new SimpleStorage();
-        vm.stopBroadcast();
-
         addPerson(address(simpleStorage), personName, personFavoriteNumber);
+        vm.stopBroadcast();
     }
 }
