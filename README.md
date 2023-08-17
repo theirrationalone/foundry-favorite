@@ -57,7 +57,7 @@ forge build
 ## Deploy:
 
 ```
-forge script script/DeployFundMe.s.sol
+forge script script/DeploySimpleStorage.s.sol
 ```
 
 ## Testing
@@ -118,7 +118,7 @@ Head over to [faucets.chain.link](https://faucets.chain.link/) and get some test
 3. Deploy
 
 ```
-forge script script/DeployFundMe.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY
+forge script script/DeploySimpleStorage.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY
 ```
 
 ## Scripts
@@ -128,7 +128,7 @@ After deploying to a testnet or local net, you can run the scripts.
 Using cast deployed locally example: 
 
 ```
-cast send <FUNDME_CONTRACT_ADDRESS> "fund()" --value 0.1ether --private-key <PRIVATE_KEY>
+cast send <SIMPLESTORAGE_CONTRACT_ADDRESS> "storeNumber()" --value 123 --private-key <PRIVATE_KEY>
 ```
 
 or
@@ -136,10 +136,10 @@ or
 forge script script/Interactions.s.sol --rpc-url sepolia  --private-key $PRIVATE_KEY  --broadcast
 ```
 
-### Withdraw
+### addPerson
 
 ```
-cast send <FUNDME_CONTRACT_ADDRESS> "withdraw()"  --private-key <PRIVATE_KEY>
+cast send <SIMPLESTORAGE_CONTRACT_ADDRESS> "addPerson(string, uint256)" anil, 12 --rpc-url $ANVIL_RPC_URL --private-key $PRIVATE_KEY
 ```
 
 ## Estimate gas
